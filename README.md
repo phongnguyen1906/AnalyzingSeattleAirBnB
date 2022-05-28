@@ -4,6 +4,10 @@ We will analyze SeattleAirBnB Public data to answer some questions relating to t
 2. Is timing of the booking affect the price ?
 3. Is the location of the property affect the price ? 
 
+## Conclusion:
+1. Most important feature in determining the listing price is the number of bedrooms & bathrooms
+2. Timing and location do affect the price
+
 ## Library Used 
 The following library is used in this project
 - pandas
