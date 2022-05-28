@@ -6,9 +6,9 @@ We will analyze SeattleAirBnB Public data to answer some questions relating to t
 
 ## Library Used 
 The following library is used in this project
-pandas
-numpy
-sklearn
+- pandas
+- numpy
+- sklearn
 
 ## File description:
 AirBnB Analysis.ipynb : notebook for the analysis
