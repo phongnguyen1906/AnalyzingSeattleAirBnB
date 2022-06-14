@@ -1,5 +1,8 @@
 # Disaster Response Pipeline Project
 
+### Introdution:
+This project apply Data Engineer techniques to build and deploy ETL & Machine Learning Pipeline to help classify responses from a disater events into different categories, so that help can arrive quickly and accurately to  those who really need it. 
+
 ### Instructions:
 1. Run the following commands in the project's root directory to set up your database and model.
 
