@@ -54,6 +54,11 @@ def clean_data(df):
 
 
 def save_data(df, database_filename):
+    ''' load data into database
+    Input : 
+    df: dataframe to load
+    database_filename: name of database file
+    '''
     engine = create_engine('sqlite:///{}.db'.format(database_filename))  
     df.to_sql('message_table', engine, index=False, if_exists='replace')
 
