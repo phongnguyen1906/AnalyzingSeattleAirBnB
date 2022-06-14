@@ -4,6 +4,16 @@ import re
 from sqlalchemy import create_engine
 
 def load_data(messages_filepath, categories_filepath):
+    ''' 
+    load data from csv files and merge into a single dataframe
+    Input: 
+    message_filepath: path to message data file
+    categories_filepath : path to categories data file
+    
+    Returns:
+    df : dataframe merging categories and messages
+    '''
+    
     # load messages dataset
     messages = pd.read_csv(messages_filepath)
     # load categories dataset
@@ -13,6 +23,13 @@ def load_data(messages_filepath, categories_filepath):
     return df
 
 def clean_data(df):
+    ''' clean and convert data into appropriate datatype
+    Input :
+    df: Input dataframe
+    Return: 
+    df: dataframe that has been cleaned
+    ''' 
+    
     # create a dataframe of the 36 individual category columns
     categories = df['categories'].str.split(";", expand = True)
     # extract column name from 1st row of category df
@@ -25,7 +42,7 @@ def clean_data(df):
         # set each value to be the last character of the string
         categories[column] = categories[column].str.split("-").str[1]
         # convert column from string to numeric
-        categories[column] = categories[column].astype(int)
+        categories[column] = categories[column].apply(lambda x: 0 if x == '0' else 1).astype('int')
         # drop the original categories column from `df`
     df = df.drop(['categories'], axis = 1)
     # concatenate the original dataframe with the new `categories` dataframe
