@@ -17,6 +17,14 @@ import pickle
 nltk.download(['omw-1.4', 'punkt', 'wordnet'])
 
 def load_data(database_filepath):
+    '''load data from database file 
+    Input:
+    database_filepath: database file
+    Return:
+    X: dataframe contains feature
+    y: dataframe contains label
+    column_names: list of categorical labels
+    '''
     # load data from database
     engine = create_engine('sqlite:///{}'.format(database_filepath))
     df = pd.read_sql_table('message_table', con=engine)
@@ -28,6 +36,10 @@ def load_data(database_filepath):
 
 
 def tokenize(text):
+    ''' tokenize and lemmatize text
+    Input: text string
+    Return: list of lemmatized tokens
+    '''
     #tokenize text
     tokens = word_tokenize(text)
     #lemmatize text
@@ -37,6 +49,8 @@ def tokenize(text):
 
 
 def build_model():
+    '''ininiate classifier and transformer then build pipeline with GridSearchCV'''
+    
     #initiate pipeline
     pipeline = Pipeline([
         ('vectorizer', CountVectorizer(tokenizer=tokenize)),
@@ -52,6 +66,14 @@ def build_model():
     return cv    
 
 def evaluate_model(model, X_test, y_test, column_names):
+    ''' predict and evaluate model
+    Input: 
+    X_test : feature dataframe for predicting
+    y_test : true labels
+    column_names : list of labels for multi output classifier
+    Output: 
+    Model score (f1, precision, recall)
+    '''
     #predict and print result:
     y_pred = model.predict(X_test)
     for i, col in enumerate(column_names):
@@ -60,6 +82,13 @@ def evaluate_model(model, X_test, y_test, column_names):
 
 
 def save_model(model, model_filepath):
+    '''save model into pickle file to run later
+    Input: 
+    model: fit and trained model
+    model_filepath : name of model to save as
+    Return:
+    model file (*.pkl) in directory
+    '''
     #save as pickle file
     pickle.dump(model, open(model_filepath, 'wb'))
 
